@@ -93,27 +93,45 @@
 }
 
 /* ===== Responsive Grid Layout ===== */
+/* Masonry Layout Container (Flex Row of Columns) */
 .projects-grid {
     display: flex;
+    /* Row of columns */
+    align-items: flex-start;
+    /* Columns align to top */
     gap: 24px;
+    /* Limit width to create space on sides */
+    max-width: 1200px;
+    margin: 0 auto;
     width: 100%;
-    flex-wrap: wrap;
-    /* Allow wrapping by default */
 }
 
+/* Individual Column Styling */
 .project-column {
     display: flex;
     flex-direction: column;
+    /* Items stack vertically */
     gap: 24px;
     flex: 1;
-    /* Enforce a minimum width so cards don't get squashed */
-    min-width: 280px;
+    /* Distribute width equally */
+    min-width: 0;
+    /* Prevent flex overflow */
 }
 
-/* ===== Project Nodes (Static Position) ===== */
+/* Individual Node Styling within Column */
 .project-node {
-    position: relative;
+    /* Reset absolute positioning styles if any remain */
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
     width: 100%;
+    /* Fill the column width */
+    height: auto;
+    /* Let content dictate height */
+    min-height: 200px;
+    /* Minimum visual height */
+    margin-bottom: 0;
+    /* Gap handles spacing */
     background: var(--color-pure-white);
     border: 2px solid var(--color-pure-black);
     border-radius: var(--radius-card);
@@ -125,8 +143,7 @@
     will-change: transform;
 }
 
-/* Hover state for the node itself (small lift + scale) 
-   Note: We combine this with the javascript translateY for siblings */
+/* Hover state for the node itself (small lift + scale) */
 .project-node:hover {
     /* Slightly lift the hovered card itself */
     transform: translateY(-8px) scale(1.02);
@@ -136,34 +153,6 @@
 }
 
 /* Responsive Columns Control */
-/* Tablet/Narrow Desktop: Force 2 columns */
-@media (max-width: 1200px) {
-    .project-column {
-        /* Force 2 columns: 50% width minus half the gap */
-        flex: 0 0 calc(50% - 12px);
-        max-width: calc(50% - 12px);
-    }
-}
-
-/* Mobile: Force 1 column */
-@media (max-width: 768px) {
-    .project-column {
-        /* Force 1 column: full width */
-        flex: 0 0 100%;
-        max-width: 100%;
-    }
-
-    .workflow-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 16px;
-    }
-
-    .workflow-canvas {
-        padding: 0 20px;
-    }
-}
-
 /* Featured nodes */
 .project-node.featured {
     border-width: 3px;
@@ -347,20 +336,21 @@
     color: var(--color-pure-white);
 }
 
-/* ===== Responsive ===== */
-@media (max-width: 1024px) {
-    .workflow-canvas {
-        min-height: 2000px;
-    }
-
-    .project-node {
-        width: 280px;
+/* Responsive Columns Control */
+/* Tablet/Narrow Desktop: Force 2 columns */
+@media (max-width: 1200px) {
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 800px;
     }
 }
 
+/* Mobile: Force 1 column */
 @media (max-width: 768px) {
-    .container-fluid {
-        padding: 0 20px;
+    .projects-grid {
+        grid-template-columns: 1fr;
+        padding: 0;
+        /* Container handles padding */
     }
 
     .workflow-header {
@@ -369,28 +359,20 @@
         gap: 16px;
     }
 
-    .legend {
-        flex-wrap: wrap;
-    }
-
     .workflow-canvas {
-        min-height: 3000px;
-        padding: 20px;
+        padding: 0 20px;
+        /* Legacy fixed height removed */
+        min-height: auto;
     }
 
     .project-node {
+        /* On mobile, cards usually act as full width blocks */
+        min-width: unset;
         width: 100%;
-        position: relative !important;
-        top: auto !important;
-        left: auto !important;
-        margin-bottom: 24px;
     }
 
-    .node-details {
-        max-height: none;
-        opacity: 1;
-        margin-top: 16px;
-    }
+    /* On mobile, details are often better always visible or handled differently, 
+       but for now we keep hover/click logic consistent */
 }
 
 /* ===== Animations ===== */
