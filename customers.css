@@ -275,9 +275,9 @@ body {
 }
 
 .featured-title {
-    font-size: 32px;
+    font-size: 24px;
     font-weight: 400;
-    line-height: 1.1;
+    line-height: 1.3;
     color: var(--color-pure-black);
     margin-bottom: 48px;
     max-width: 100%;
