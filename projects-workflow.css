@@ -155,32 +155,6 @@
     z-index: 100;
 }
 
-/* Responsive Columns Control */
-/* Featured nodes */
-.project-node.featured {
-    border-width: 3px;
-    border-color: var(--color-brand-green);
-}
-
-.project-node.featured:hover {
-    box-shadow: 0 20px 60px rgba(46, 204, 113, 0.5);
-}
-
-/* Featured badge */
-.featured-badge {
-    position: absolute;
-    top: -12px;
-    right: 20px;
-    background: var(--color-brand-green);
-    color: var(--color-pure-white);
-    padding: 4px 12px;
-    border-radius: 12px;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-}
-
 /* Node header */
 .node-header {
     display: flex;
@@ -195,7 +169,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid var(--color-pure-black);
+    border: 2px solid var(--color-brand-green);
     border-radius: 8px;
     background: var(--color-pure-white);
     position: relative;
@@ -204,20 +178,21 @@
 .node-icon svg {
     width: 24px;
     height: 24px;
-    stroke: var(--color-pure-black);
+    stroke: var(--color-brand-green);
     fill: none;
     stroke-width: 2;
 }
 
 .node-badge {
-    background: var(--color-platinum);
-    color: var(--color-pure-black);
+    background: var(--color-pure-white);
+    color: var(--color-brand-green);
     padding: 4px 10px;
     border-radius: 6px;
     font-size: 11px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    border: 1px solid var(--color-platinum);
 }
 
 /* Node title */
@@ -376,25 +351,4 @@
 
     /* On mobile, details are often better always visible or handled differently, 
        but for now we keep hover/click logic consistent */
-}
-
-/* ===== Animations ===== */
-@keyframes pulse {
-
-    0%,
-    100% {
-        box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.4);
-    }
-
-    50% {
-        box-shadow: 0 0 0 10px rgba(46, 204, 113, 0);
-    }
-}
-
-.project-node.featured {
-    animation: pulse 3s infinite;
-}
-
-.project-node.featured:hover {
-    animation: none;
 }
