@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects & Portfolio | Kidaflow Automations</title>
+    <meta name="description"
+        content="Explore Kidaflow's portfolio of AI automation projects. Interactive workflow diagram showcasing our custom AI agents and intelligent automation solutions.">
+    <link rel="stylesheet" href="customers.css">
+    <link rel="stylesheet" href="projects-workflow.css">
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-logo">
+            <a href="https://kidaflow.com">
+                <img src="kidaflow_logo.png" alt="Kidaflow Logo">
+            </a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="https://kidaflow.com" class="nav-link">Home</a></li>
+            <li><a href="projects.html" class="nav-link">Projects & Portfolio</a></li>
+            <li><a href="customers.html" class="nav-link">Success Stories</a></li>
+            <li><a href="#" class="nav-link">Services & Pricing</a></li>
+            <li><a href="#" class="nav-link">About</a></li>
+            <li><a href="https://kidaflow-ai-automati-w3kc.bolt.host/" class="nav-link highlight" target="_blank">Free
+                    AI Audit</a></li>
+            <li><a href="https://kidaflow.com/contact" class="nav-link" target="_blank">Contact</a></li>
+        </ul>
+        <div class="mobile-menu-btn">☰</div>
+    </nav>
+
+    <!-- Workflow Diagram Section -->
+    <section class="workflow-section">
+        <div class="container-fluid">
+            <!-- Header & Legend -->
+            <div class="workflow-header">
+                <div class="header-content">
+                    <h2 class="section-title">Our Projects</h2>
+                    <p class="section-hint">Hover over cards to view details • Click to see full project</p>
+                </div>
+                <div class="search-wrapper">
+                    <div class="search-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                    </div>
+                    <input type="text" id="projectSearch" class="search-input"
+                        placeholder="Search projects (e.g., 'booking', 'n8n', 'voice')...">
+                </div>
+            </div>
+
+            <!-- Workflow Canvas -->
+            <div class="workflow-canvas" id="workflowCanvas">
+                <div class="projects-grid">
+                    <!-- Column 1 -->
+                    <div class="project-column">
+                        <!-- Node 1 -->
+                        <div class="project-node regular" data-project="ai-booking">
+                            <div class="node-header">
+                                <div class="node-icon"><svg viewBox="0 0 24 24">
+                                        <rect x="3" y="4" width="18" height="18" rx="2" />
+                                        <line x1="16" y1="2" x2="16" y2="6" />
+                                        <line x1="8" y1="2" x2="8" y2="6" />
+                                        <line x1="3" y1="10" x2="21" y2="10" />
+                                    </svg></div>
+                                <div class="node-badge">Booking</div>
+                            </div>
+                            <h3 class="node-title">AI Booking System</h3>
+                            <p class="node-subtitle">n8n + Cal.com</p>
+                            <div class="node-details">
+                                <p class="node-description">Books, cancels, and reschedules via natural language;
+                                    prevents
+                                    user errors and keeps stateful memory.</p>
+                                <div class="node-tags">
+                                    <span class="tag">n8n</span>
+                                    <span class="tag">Cal.com</span>
+                                    <span class="tag">OpenAI</span>
+                                </div>
+                                <div class="node-outcome">
+                                    <strong>Key outcome:</strong> Automated bookings
+                                </div>
+                                <div class="node-actions">
+                                    <a href="#" class="btn-view">View Project →</a>
+                                    <a href="#" class="btn-video">Watch Video</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Node 5 -->
+                        <div class="project-node featured" data-project="cold-email">
+                            <div class="featured-badge">FEATURED</div>
+                            <div class="node-header">
+                                <div class="node-icon"><svg viewBox="0 0 24 24">
+                                        <path
+                                            d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                        <polyline points="22,6 12,13 2,6" />
+                                    </svg></div>
+                                <div class="node-badge">Email</div>
+                            </div>
+                            <h3 class="node-title">AI-Powered Cold Email Personalization</h3>
+                            <p class="node-subtitle">Real-time prospect data</p>
+                            <div class="node-details">
+                                <p class="node-description">An automation that scrapes real prospect data and generates
+                                    thousands of personalized cold emails in minutes.</p>
+                                <div class="node-tags">
+                                    <span class="tag">n8n</span>
+                                    <span class="tag">OpenAI</span>
+                                    <span class="tag">Instagram API</span>
+                                </div>
+                                <div class="node-outcome">
+                                    <strong>Key outcome:</strong> Scrapes real-time prospect data
+                                </div>
+                                <div class="node-actions">
+                                    <a href="#" class="btn-view">View Project →</a>
+                                    <a href="#" class="btn-video">Watch Video</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Node 9 -->
+                        <div class="project-node regular" data-project="ghl-automations">
+                            <div class="node-header">
+                                <div class="node-icon"><svg viewBox="0 0 24 24">
+                                        <circle cx="12" cy="12" r="3" />
+                                        <path
+                                            d="M12 1v6m0 6v6M5.64 5.64l4.24 4.24m4.24 4.24l4.24 4.24M1 12h6m6 0h6M5.64 18.36l4.24-4.24m4.24-4.24l4.24-4.24" />
+                                    </svg></div>
+                                <div class="node-badge">CRM</div>
+                            </div>
+                            <h3 class="node-title">GoHighLevel Funnels & Workflows</h3>
+                            <p class="node-subtitle">Complete automation suite</p>
+                            <div class="node-details">
+                                <p class="node-description">A suite of automations: confirmations, no-show follow-ups,
+                                    missed-call text-back, FAQ AI replies, IG DM replies, reactivation, and reviews.</p>
+                                <div class="node-tags">
+                                    <span class="tag">GoHighLevel</span>
+                                    <span class="tag">SMS</span>
+                                    <span class="tag">Email</span>
+                                </div>
+                                <div class="node-outcome">
+                                    <strong>Key outcome:</strong> Complete CRM automation
+                                </div>
+                                <div class="node-actions">
+                                    <a href="#" class="btn-view">View Project →</a>
+                                    <a href="#" class="btn-video">Watch Video</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Node 13 -->
+                        <div class="project-node featured" data-project="coaching-assistant">
+                            <div class="featured-badge">FEATURED</div>
+                            <div class="node-header">
+                                <div class="node-icon"><svg viewBox="0 0 24 24">
+                                        <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                                        <path d="M6 12v5c3 3 9 3 12 0v-5" />
+                                    </svg></div>
+                                <div class="node-badge">Coaching</div>
+                            </div>
+                            <h3 class="node-title">24/7 Coaching Assistant</h3>
+                            <p class="node-subtitle">$10k/m simple system</p>
+                            <div class="node-details">
+                                <p class="node-description">A 24/7 AI coaching assistant that turns your playbooks,
+                                    frameworks,
+                                    and methods into a digital system.</p>
+                                <div class="node-tags">
+                                    <span class="tag">n8n</span>
+                                    <span class="tag">Slack</span>
+                                    <span class="tag">Airtable</span>
+                                </div>
+                                <div class="node-outcome">
+                                    <strong>Key outcome:</strong> 24/7 AI coaching assistant built with n8n + Slack
+                                </div>
+                                <div class="node-actions">
+                                    <a href="#" class="btn-view">View Project →</a>
+                                    <a href="#" class="btn-video">Watch Video</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Node 17 -->
+                        <div class="project-node regular" data-project="sales-hiring">
+                            <div class="node-header">
+                                <div class="node-icon"><svg viewBox="0 0 24 24">
+                                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                        <circle cx="9" cy="7" r="4" />
+                                        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                                    </svg></div>
+                                <div class="node-badge">Hiring</div>
+                            </div>
+                            <h3 class="node-title">Automated Sales Hiring Workflow</h3>
+                            <p class="node-subtitle">Typeform + ClickUp</p>
+                            <div class="node-details">
+                                <p class="node-description">Typeform → ClickUp pipeline with stage-based interview
+                                    emails and
+                                    follow-up guards.</p>
+                                <div class="node-tags">
+                                    <span class="tag">Typeform</span>
+                                    <span class="tag">ClickUp</span>
+                                    <span class="tag">Email</span>
+                                </div>
+                                <div class="node-outcome">
+                                    <strong>Key outcome:</strong> Automated hiring pipeline
+                                </div>
+                                <div class="node-actions">
+                                    <a href="#" class="btn-view">View Project →</a>
+                                    <a href="#" class="btn-video">Watch Video</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column 2 -->
+                    <div class="project-column">
+                        <!-- Node 2 -->
+                        <div class="project-node featured" data-project="customer-booking">
+                            <div class="featured-badge">FEATURED</div>
+                            <div class="node-header">
+                                <div class="node-icon"><svg viewBox="0 0 24 24">
+                                        <rect x="3" y="4" width="18" height="18" rx="2" />
+                                        <line x1="16" y1="2" x2="16" y2="6" />
+                                        <line x1="8" y1="2" x2="8" y2="6" />
+                                        <line x1="3" y1="10" x2="21" y2="10" />
+                                    </svg></div>
+                                <div class="node-badge">Booking</div>
+                            </div>
+                            <h3 class="node-title">Automated Customer Booking System</h3>
+                            <p class="node-subtitle">24/7 chatbot + calendar</p>
+                            <div class="node-details">
+                                <p class="node-description">A 24/7 automated booking system powered by chatbots and
+                                    calendar
+                                    integrations. Customers can create, cancel, and reschedule appointments instantly.
+                                </p>
+                                <div class="node-tags">
+                                    <span class="tag">n8n</span>
+                                    <span class="tag">Cal.com</span>
+                                    <span class="tag">WhatsApp</span>
+                                </div>
+                                <div class="node-outcome">
+                                    <strong>Key outcome:</strong> Automated 24/7 customer bookings with chatbot +
+                                    calendar
+                                </div>
+                                <div class="node-actions">
+                                    <a href="#" class="btn-view">View Project →</a>
+                                    <a href="#" class="btn-video">Watch Video</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Node 6 -->
+                        <div class="project-node featured" data-project="21k-emails">
+                            <div class="featured-badge">FEATURED</div>
+                            <div class="node-header">
+                                <div class="node-icon"><svg viewBox="0 0 24 24">
+                                        <path
+                                            d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                        <polyline points="22,6 12,13 2,6" />
+                                    </svg></div>
+                                <div class="node-badge">Cold Email</div>
+                            </div>
+                            <h3 class="node-title">21,000+ Cold Emails in 29 Days</h3>
+                            <p class="node-subtitle">Fully automated outreach</p>
+                            <div class="node-details">
+                                <p class="node-description">Built a fully automated AI outreach system that sends
+                                    20,000+
+                                    cold emails per month — personalized, compliant, and scalable.</p>
+                                <div class="node-tags">
+                                    <span class="tag">n8n</span>
+                                    <span class="tag">Instantly</span>
+                                    <span class="tag">Apollo</span>
+                                </div>
+                                <div class="node-outcome">
+                                    <strong>Key outcome:</strong> Fully automated cold email outreach system
+                                </div>
+                                <div class="node-actions">
+                                    <a href="#" class="btn-view">View Project →</a>
+                                    <a href="#" class="btn-video">Watch Video</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Node 10 -->
+                        <div class="project-node regular" data-project="replace-calendly">
+                            <div class="node-header">
+                                <div class="node-icon"><svg viewBox="0 0 24 24">
+                                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                                    </svg></div>
+                                <div class="node-badge">Booking</div>
+                            </div>
+                            <h3 class="node-title">Replace Calendly with AI Agent</h3>
+                            <p class="node-subtitle">Conversational bookings</p>
+                            <div class="node-details">
+                                <p class="node-description">Conversational bookings via n8n + OpenAI + Cal.com;
+                                    extensible
+                                    to CRM/SMS/voice.</p>
+                                <div class="node-tags">
+                                    <span class="tag">n8n</span>
+                                    <span class="tag">Cal.com</span>
+                                    <span class="tag">OpenAI</span>
+                                </div>
+                                <div class="node-outcome">
+                                    <strong>Key outcome:</strong> Conversational AI bookings
+                                </div>
+                                <div class="node-actions">
+                                    <a href="#" class="btn-view">View Project →</a>
+                                    <a href="#" class="btn-video">Watch Video</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Node 14 -->
+                        <div class="project-node featured" data-project="whatsapp-support">
+                            <div class="featured-badge">FEATURED</div>
+                            <div class="node-header">
+                                <div class="node-icon"><svg viewBox="0 0 24 24">
+                                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                                    </svg></div>
+                                <div class="node-badge">AI</div>
+                            </div>
+                            <h3 class="node-title">AI Customer Support on WhatsApp</h3>
+                            <p class="node-subtitle">24/7 chatbot</p>
+                            <div class="node-details">
+                                <p class="node-description">⚡ 24/7 WhatsApp AI chatbot that qualifies leads, answers
+                                    instantly,
+                                    and books calls automatically.</p>
+                                <div class="node-tags">
+                                    <span class="tag">WhatsApp</span>
+                                    <span class="tag">n8n</span>
+                                    <span class="tag">OpenAI</span>
+                                </div>
+                                <div class="node-outcome">
+                                    <strong>Key outcome:</strong> AI chatbot integrated into WhatsApp + websites
+                                </div>
+                                <div class="node-actions">
+                                    <a href="#" class="btn-view">View Project →</a>
+                                    <a href="#" class="btn-video">Watch Video</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Node 18 -->
+                        <div class="project-node featured" data-project="ai-bookkeeping">
+                            <div class="featured-badge">FEATURED</div>
+                            <div class="node-header">
+                                <div class="node-icon"><svg viewBox="0 0 24 24">
+                                        <line x1="12" y1="1" x2="12" y2="23" />
+                                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                                    </svg></div>
+                                <div class="node-badge">AI Automation</div>
+                            </div>
+                            <h3 class="node-title">AI Bookkeeping Automation</h3>
+                            <p class="node-subtitle">For accountants</p>
+                            <div class="node-details">
+                                <p class="node-description">Complete AI bookkeeping automation system that transforms
+                                    raw
+                                    financial data into fully branded, client-ready reports in minutes.</p>
+                                <div class="node-tags">
+                                    <span class="tag">Airtable</span>
+                                    <span class="tag">Make</span>
+                                    <span class="tag">OpenAI</span>
+                                </div>
+                                <div class="node-outcome">
+                                    <strong>Key outcome:</strong> Pulls transaction data from Square, QuickBooks, and
+                                    Google
+                                    Sheets automatically
+                                </div>
+                                <div class="node-actions">
+                                    <a href="#" class="btn-view">View Project →</a>
+                                    <a href="#" class="btn-video">Watch Video</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column 3 -->
+                    <div class="project-column">
+                        <!-- Node 3 -->
+                        <div class="project-node featured" data-project="akwaaba">
+                            <div class="featured-badge">FEATURED</div>
+                            <div class="node-header">
+                                <div class="node-icon"><svg viewBox="0 0 24 24">
+                                        <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
+                                        <line x1="12" y1="18" x2="12.01" y2="18" />
+                                    </svg></div>
+                                <div class="node-badge">Content</div>
+                            </div>
+                            <h3 class="node-title">Akwaaba App – Social Posting Automation</h3>
+                            <p class="node-subtitle">Hands-off scheduling</p>
+                            <div class="node-details">
+                                <p class="node-description">Automated Twitter threads and LinkedIn posts using Google
+                                    Sheets
+                                    as the content hub, Buffer for scheduling, and OpenAI for copy tweaks.</p>
+                                <div class="node-tags">
+                                    <span class="tag">Make</span>
+                                    <span class="tag">Buffer</span>
+                                    <span class="tag">OpenAI</span>
+                                </div>
+                                <div class="node-outcome">
+                                    <strong>Key outcome:</strong> Daily hands-off scheduling
+                                </div>
+                                <div class="node-actions">
+                                    <a href="#" class="btn-view">View Project →</a>
+                                    <a href="#" class="btn-video">Watch Video</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Node 7 -->
+                        <div class="project-node featured" data-project="ocr-legal">
+                            <div class="featured-badge">FEATURED</div>
+                            <div class="node-header">
+                                <div class="node-icon"><svg viewBox="0 0 24 24">
+                                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                        <polyline points="14 2 14 8 20 8" />
+                                        <line x1="16" y1="13" x2="8" y2="13" />
+                                        <line x1="16" y1="17" x2="8" y2="17" />
+                                        <polyline points="10 9 9 9 8 9" />
+                                    </svg></div>
+                                <div class="node-badge">Agents</div>
+                            </div>
+                            <h3 class="node-title">Automate OCR + WhatsApp for Legal Firms</h3>
+                            <p class="node-subtitle">Document processing</p>
+                            <div class="node-details">
+                                <p class="node-description">End-to-end intake: WhatsApp uploads → OCR → structured data
+                                    →
+                                    validation → CRM. Reduces manual document reading.</p>
+                                <div class="node-tags">
+                                    <span class="tag">n8n</span>
+                                    <span class="tag">Mistral OCR</span>
+                                    <span class="tag">WhatsApp</span>
+                                </div>
+                                <div class="node-outcome">
+                                    <strong>Key outcome:</strong> Minutes to structured data
+                                </div>
+                                <div class="node-actions">
+                                    <a href="#" class="btn-view">View Project →</a>
+                                    <a href="#" class="btn-video">Watch Video</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Node 11 -->
+                        <div class="project-node regular" data-project="viral-content">
+                            <div class="node-header">
+                                <div class="node-icon"><svg viewBox="0 0 24 24">
+                                        <circle cx="12" cy="12" r="10" />
+                                        <circle cx="12" cy="12" r="6" />
+                                        <circle cx="12" cy="12" r="2" />
+                                    </svg></div>
+                                <div class="node-badge">Content</div>
+                            </div>
+                            <h3 class="node-title">AI Viral Content OS</h3>
+                            <p class="node-subtitle">Cross-platform discovery</p>
+                            <div class="node-details">
+                                <p class="node-description">Cross-platform discovery of viral content with structured
+                                    analysis and Airtable-driven recreation workflows.</p>
+                                <div class="node-tags">
+                                    <span class="tag">Airtable</span>
+                                    <span class="tag">OpenAI</span>
+                                    <span class="tag">APIs</span>
+                                </div>
+                                <div class="node-outcome">
+                                    <strong>Key outcome:</strong> Automated content discovery
+                                </div>
+                                <div class="node-actions">
+                                    <a href="#" class="btn-view">View Project →</a>
+                                    <a href="#" class="btn-video">Watch Video</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Node 15 -->
+                        <div class="project-node regular" data-project="lovable-proposals">
+                            <div class="node-header">
+                                <div class="node-icon"><svg viewBox="0 0 24 24">
+                                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                        <polyline points="14 2 14 8 20 8" />
+                                        <line x1="16" y1="13" x2="8" y2="13" />
+                                        <line x1="16" y1="17" x2="8" y2="17" />
+                                        <polyline points="10 9 9 9 8 9" />
+                                    </svg></div>
+                                <div class="node-badge">Docs</div>
+                            </div>
+                            <h3 class="node-title">Lovable × Proposal Automation</h3>
+                            <p class="node-subtitle">Branded proposals</p>
+                            <div class="node-details">
+                                <p class="node-description">Generate branded proposals via Lovable AI and send through
+                                    PandaDoc/Google Slides with dynamic placeholders.</p>
+                                <div class="node-tags">
+                                    <span class="tag">Lovable</span>
+                                    <span class="tag">PandaDoc</span>
+                                    <span class="tag">Google Slides</span>
+                                </div>
+                                <div class="node-outcome">
+                                    <strong>Key outcome:</strong> Automated proposal generation
+                                </div>
+                                <div class="node-actions">
+                                    <a href="#" class="btn-view">View Project →</a>
+                                    <a href="#" class="btn-video">Watch Video</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column 4 -->
+                    <div class="project-column">
+                        <!-- Node 4 -->
+                        <div class="project-node featured" data-project="ai-voice-plumbing">
+                            <div class="featured-badge">FEATURED</div>
+                            <div class="node-header">
+                                <div class="node-icon"><svg viewBox="0 0 24 24">
+                                        <path
+                                            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                                    </svg></div>
+                                <div class="node-badge">AI Voice</div>
+                            </div>
+                            <h3 class="node-title">AI Voice Agent for Plumbing</h3>
+                            <p class="node-subtitle">ServiceTitan integration</p>
+                            <div class="node-details">
+                                <p class="node-description">Booking + price enquiries via AI voice. Two variants
+                                    shipped:
+                                    GHL+Zapier and Retell+n8n, integrated with ServiceTitan.</p>
+                                <div class="node-tags">
+                                    <span class="tag">Retell</span>
+                                    <span class="tag">n8n</span>
+                                    <span class="tag">GoHighLevel</span>
+                                </div>
+                                <div class="node-outcome">
+                                    <strong>Key outcome:</strong> Automated bookings
+                                </div>
+                                <div class="node-actions">
+                                    <a href="#" class="btn-view">View Project →</a>
+                                    <a href="#" class="btn-video">Watch Video</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Node 8 -->
+                        <div class="project-node featured" data-project="voice-receptionist">
+                            <div class="featured-badge">FEATURED</div>
+                            <div class="node-header">
+                                <div class="node-icon"><svg viewBox="0 0 24 24">
+                                        <path
+                                            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                                    </svg></div>
+                                <div class="node-badge">AI Voice</div>
+                            </div>
+                            <h3 class="node-title">AI Voice Receptionist</h3>
+                            <p class="node-subtitle">Never miss a call</p>
+                            <div class="node-details">
+                                <p class="node-description">An AI voice agent that answers every call, books
+                                    appointments
+                                    automatically, and updates your calendar in real time.</p>
+                                <div class="node-tags">
+                                    <span class="tag">Retell AI</span>
+                                    <span class="tag">Cal.com</span>
+                                    <span class="tag">Google Calendar</span>
+                                </div>
+                                <div class="node-outcome">
+                                    <strong>Key outcome:</strong> Built with Retell AI + Cal.com + Google Calendar
+                                </div>
+                                <div class="node-actions">
+                                    <a href="#" class="btn-view">View Project →</a>
+                                    <a href="#" class="btn-video">Watch Video</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Node 12 -->
+                        <div class="project-node regular" data-project="proposals">
+                            <div class="node-header">
+                                <div class="node-icon"><svg viewBox="0 0 24 24">
+                                        <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" />
+                                        <polyline points="13 2 13 9 20 9" />
+                                    </svg></div>
+                                <div class="node-badge">CRM</div>
+                            </div>
+                            <h3 class="node-title">Automated Proposals for Coaches</h3>
+                            <p class="node-subtitle">Monday CRM + PandaDoc</p>
+                            <div class="node-details">
+                                <p class="node-description">Monday CRM stages trigger OpenAI-crafted proposals sent via
+                                    PandaDoc for faster, on-brand closers.</p>
+                                <div class="node-tags">
+                                    <span class="tag">Monday.com</span>
+                                    <span class="tag">OpenAI</span>
+                                    <span class="tag">PandaDoc</span>
+                                </div>
+                                <div class="node-outcome">
+                                    <strong>Key outcome:</strong> Faster proposal generation
+                                </div>
+                                <div class="node-actions">
+                                    <a href="#" class="btn-view">View Project →</a>
+                                    <a href="#" class="btn-video">Watch Video</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Node 16 -->
+                        <div class="project-node regular" data-project="slack-inventory">
+                            <div class="node-header">
+                                <div class="node-icon"><svg viewBox="0 0 24 24">
+                                        <path
+                                            d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                                        <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+                                        <line x1="12" y1="22.08" x2="12" y2="12" />
+                                    </svg></div>
+                                <div class="node-badge">Ops</div>
+                            </div>
+                            <h3 class="node-title">Slack-Powered Inventory Assistant</h3>
+                            <p class="node-subtitle">For hotels</p>
+                            <div class="node-details">
+                                <p class="node-description">AI monitors stock, alerts on thresholds, and generates
+                                    purchase
+                                    orders; centralised data with Slack commands.</p>
+                                <div class="node-tags">
+                                    <span class="tag">Slack</span>
+                                    <span class="tag">Datastore</span>
+                                    <span class="tag">APIs</span>
+                                </div>
+                                <div class="node-outcome">
+                                    <strong>Key outcome:</strong> Automated inventory management
+                                </div>
+                                <div class="node-actions">
+                                    <a href="#" class="btn-view">View Project →</a>
+                                    <a href="#" class="btn-video">Watch Video</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section fade-in-up">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Build Your Automation?</h2>
+                <p>Let's create intelligent solutions tailored to your business needs</p>
+                <a href="https://kidaflow.com/#contact" class="btn-cta">Schedule a Free Consultation</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Kidaflow</h3>
+                    <p>Automating workflows for modern businesses. We help companies scale efficiently through
+                        intelligent automation solutions.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <div class="footer-links">
+                        <a href="https://kidaflow.com/">Home</a>
+                        <a href="projects.html">Projects & Portfolio</a>
+                        <a href="customers.html">Customer Stories</a>
+                        <a href="https://kidaflow.com/#contact">Contact</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <div class="footer-links">
+                        <a href="mailto:hello@kidaflow.com">hello@kidaflow.com</a>
+                        <a href="https://kidaflow.com/#contact">Schedule a Call</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Kidaflow. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="customers.js"></script>
+    <script src="projects-workflow.js"></script>
+</body>
+
+</html>
