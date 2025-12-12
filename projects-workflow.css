@@ -104,6 +104,9 @@
     max-width: 1200px;
     margin: 0 auto;
     width: 100%;
+    /* Hide initially to prevent horizontal flash before JS runs */
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 /* Individual Column Styling */

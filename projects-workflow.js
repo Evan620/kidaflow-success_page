@@ -64,6 +64,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }, index * 30);
         });
 
+        // Fade in the grid after columns are set up (prevents horizontal flash)
+        requestAnimationFrame(() => {
+            projectsGrid.style.opacity = '1';
+        });
+
         // 5. Update Pagination Controls
         if (paginationControls) {
             if (isSearching) {
