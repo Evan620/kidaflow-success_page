@@ -56,14 +56,14 @@ body {
 }
 
 .breadcrumb-nav a {
-    color: var(--color-text-secondary);
+    color: #2ecc71 !important;
     text-decoration: none;
     transition: color var(--transition-normal);
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .breadcrumb-nav a:hover {
-    color: var(--color-pure-black);
+    color: #27ae60 !important;
 }
 
 .breadcrumb-nav span:not(.breadcrumb-nav > span:last-child) {
@@ -136,6 +136,7 @@ body {
     overflow: hidden;
     box-shadow: var(--shadow-xl);
     border: 1px solid var(--color-platinum);
+    background: #ffffff;
 }
 
 .hero-image img {
