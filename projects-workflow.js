@@ -29,34 +29,18 @@ document.addEventListener('DOMContentLoaded', () => {
         // 2. Clear Grid
         projectsGrid.innerHTML = '';
 
-        // 3. Create Columns
-        // Determine number of columns based on window width (simple check)
-        const width = window.innerWidth;
-        let numCols = 3;
-        if (width <= 768) numCols = 1;
-        else if (width <= 1200) numCols = 2;
-
-        const columns = [];
-        for (let i = 0; i < numCols; i++) {
-            const col = document.createElement('div');
-            col.className = 'project-column';
-            columns.push(col);
-            projectsGrid.appendChild(col);
-        }
-
-        // 4. Distribute Nodes into Columns (Masonry-ish / Sequential)
-        // We want left-to-right ordering visual, so:
-        // Item 0 -> Col 0
-        // Item 1 -> Col 1
-        // Item 2 -> Col 2
-        // Item 3 -> Col 0...
+        // 3. Render Nodes (CSS Grid handles layout)
         nodesToShow.forEach((node, index) => {
             node.style.display = 'block';
-            node.classList.remove('fade-in');
+            node.classList.remove('fade-in', 'fade-in-visible');
             node.style.opacity = ''; // Reset
 
-            const colIndex = index % numCols;
-            columns[colIndex].appendChild(node);
+            // Add fade-in-up class for scroll animation
+            if (!node.classList.contains('fade-in-up')) {
+                node.classList.add('fade-in-up');
+            }
+
+            projectsGrid.appendChild(node);
 
             // Staggered Animation
             setTimeout(() => {
@@ -88,6 +72,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         }
+
+        // Re-observe nodes for scroll animation
+        setupScrollAnimations();
     }
 
     // Window Resize Handler to re-distribute columns
@@ -103,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (currentPage > 1) {
                 currentPage--;
                 updateView();
-                projectsGrid.scrollIntoView({ behavior: 'smooth' });
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         });
     }
@@ -114,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (currentPage < totalPages) {
                 currentPage++;
                 updateView();
-                projectsGrid.scrollIntoView({ behavior: 'smooth' });
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         });
     }
@@ -145,7 +132,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (searchInput) {
         searchInput.addEventListener('input', (e) => {
-            filterProjects(e.target.value);
+            const query = e.target.value.toLowerCase().trim();
+
+            if (query === '') {
+                // Reset to all nodes
+                filteredNodes = allNodes;
+                allNodes.forEach(node => node.classList.remove('dimmed'));
+            } else {
+                // Filter nodes
+                filteredNodes = allNodes.filter(node => {
+                    const title = node.querySelector('.node-title')?.textContent.toLowerCase() || '';
+                    const description = node.querySelector('.node-description')?.textContent.toLowerCase() || '';
+                    const tags = Array.from(node.querySelectorAll('.tag')).map(tag => tag.textContent.toLowerCase()).join(' ');
+                    return title.includes(query) || description.includes(query) || tags.includes(query);
+                });
+
+                // Dim non-matching nodes
+                allNodes.forEach(node => {
+                    if (!filteredNodes.includes(node)) {
+                        node.classList.add('dimmed');
+                    } else {
+                        node.classList.remove('dimmed');
+                    }
+                });
+            }
+
+            currentPage = 1; // Reset to first page
+            updateView();
         });
     }
 
@@ -153,6 +166,36 @@ document.addEventListener('DOMContentLoaded', () => {
     // If user wants expand logic back, we can add it here.
     // For now, just handling layout.
 
+    // ===== Scroll-based Fade-in Animation =====
+    function setupScrollAnimations() {
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    // Add slight stagger effect for grid items
+                    setTimeout(() => {
+                        entry.target.classList.add('fade-in-visible');
+                    }, index * 50);
+
+                    // Unobserve after animation to improve performance
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with fade-in-up class
+        const fadeElements = document.querySelectorAll('.fade-in-up');
+        fadeElements.forEach(element => {
+            observer.observe(element);
+        });
+    }
+
     // Initial Render
     updateView();
+
+    console.log('Projects page initialized with scroll animations! 🚀');
 });

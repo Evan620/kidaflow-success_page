@@ -93,14 +93,11 @@
 }
 
 /* ===== Responsive Grid Layout ===== */
-/* Masonry Layout Container (Flex Row of Columns) */
+/* CSS Grid Container */
 .projects-grid {
-    display: flex;
-    /* Row of columns */
-    align-items: flex-start;
-    /* Columns align to top */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 24px;
-    /* Limit width to create space on sides */
     max-width: 1200px;
     margin: 0 auto;
     width: 100%;
@@ -109,49 +106,49 @@
     transition: opacity 0.3s ease;
 }
 
-/* Individual Column Styling */
-.project-column {
-    display: flex;
-    flex-direction: column;
-    /* Items stack vertically */
-    gap: 24px;
-    flex: 1;
-    /* Distribute width equally */
-    min-width: 0;
-    /* Prevent flex overflow */
-}
-
-/* Individual Node Styling within Column */
+/* Individual Node Styling */
 .project-node {
     /* Reset absolute positioning styles if any remain */
     position: relative !important;
     top: auto !important;
     left: auto !important;
     width: 100%;
-    /* Fill the column width */
-    height: auto;
-    /* Let content dictate height */
+    height: 100%;
+    /* Stretch to match grid row height */
     min-height: 200px;
     /* Minimum visual height */
     margin-bottom: 0;
-    /* Gap handles spacing */
-    background: var(--color-pure-white);
-    border: 2px solid var(--color-pure-black);
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05),
+        0 1px 3px rgba(0, 0, 0, 0.08),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.5);
     border-radius: var(--radius-card);
     padding: 24px;
     cursor: pointer;
-    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s ease, border-color 0.3s ease;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        box-shadow 0.3s ease,
+        border-color 0.3s ease,
+        background 0.3s ease;
     z-index: 10;
     /* Ensure hardware acceleration for smooth movement */
     will-change: transform;
+    /* Content Layout */
+    display: flex;
+    flex-direction: column;
 }
 
 /* Hover state for the node itself (small lift + scale) */
 .project-node:hover {
     /* Slightly lift the hovered card itself */
     transform: translateY(-8px) scale(1.02);
-    box-shadow: var(--shadow-hover-green);
-    border-color: var(--color-brand-green);
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1),
+        0 6px 12px rgba(0, 0, 0, 0.08),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+    border-color: rgba(0, 0, 0, 0.15);
     z-index: 100;
 }
 
@@ -210,18 +207,16 @@
     margin-bottom: 16px;
 }
 
-/* Node details (hidden by default, shown on hover) */
+/* Node details (visible by default) */
 .node-details {
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transition: all var(--transition-smooth);
-}
-
-.project-node:hover .node-details {
-    max-height: 500px;
+    max-height: none;
+    overflow: visible;
     opacity: 1;
     margin-top: 16px;
+    flex-grow: 1;
+    /* Fill available space in fixed-height card */
+    display: flex;
+    flex-direction: column;
 }
 
 .node-description {
@@ -257,7 +252,7 @@
 
 /* Key outcome */
 .node-outcome {
-    background: linear-gradient(135deg, rgba(46, 204, 113, 0.1) 0%, rgba(46, 204, 113, 0.05) 100%);
+    background: rgba(0, 0, 0, 0.03);
     border-left: 3px solid var(--color-brand-green);
     padding: 12px;
     margin-bottom: 16px;
@@ -343,6 +338,7 @@
         min-height: auto;
     }
 
+
     .project-node {
         /* On mobile, cards usually act as full width blocks */
         min-width: unset;
@@ -351,4 +347,79 @@
 
     /* On mobile, details are often better always visible or handled differently, 
        but for now we keep hover/click logic consistent */
+}
+
+/* ===== Pagination Controls ===== */
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    margin-top: 60px;
+    padding: 20px;
+}
+
+.nav-btn {
+    padding: 12px 28px;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05),
+        0 1px 3px rgba(0, 0, 0, 0.08),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-pure-black);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    font-family: inherit;
+}
+
+.nav-btn:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.9);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1),
+        0 4px 8px rgba(0, 0, 0, 0.08),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+    border-color: rgba(0, 0, 0, 0.15);
+}
+
+.nav-btn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.nav-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.page-indicator {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    padding: 8px 16px;
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: 8px;
+    min-width: 120px;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .pagination-controls {
+        gap: 16px;
+        margin-top: 40px;
+    }
+
+    .nav-btn {
+        padding: 10px 20px;
+        font-size: 13px;
+    }
+
+    .page-indicator {
+        font-size: 13px;
+        min-width: 100px;
+    }
 }
