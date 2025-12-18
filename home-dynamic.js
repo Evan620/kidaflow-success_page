@@ -5,8 +5,32 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     initCarousel();
+    initMobileMenu();
     // Service accordion is handled via inline onclick but we can enhance it here if needed
 });
+
+/* ===== Mobile Menu Toggle ===== */
+function initMobileMenu() {
+    const btn = document.querySelector('.mobile-menu-btn');
+    const nav = document.querySelector('.nav-links');
+
+    if (btn && nav) {
+        btn.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            // Change ☰ to ✕ when active
+            btn.innerHTML = nav.classList.contains('active') ? '✕' : '☰';
+        });
+
+        // Close menu when a link is clicked
+        const links = nav.querySelectorAll('.nav-link');
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('active');
+                btn.innerHTML = '☰';
+            });
+        });
+    }
+}
 
 /* ===== Testimonial Carousel ===== */
 function initCarousel() {

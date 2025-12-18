@@ -158,13 +158,34 @@
 }
 
 @media (max-width: 768px) {
+    .navbar {
+        padding: 0 20px;
+    }
+
     .nav-links {
-        display: none;
-        /* Simple hide for now, would need JS for toggle */
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: var(--nav-height);
+        left: 0;
+        width: 100%;
+        background: var(--color-pure-white);
+        padding: 40px 20px;
+        gap: 30px;
+        border-bottom: 1px solid var(--color-platinum);
+        transform: translateY(-150%);
+        transition: transform var(--transition-smooth);
+        z-index: 999;
+        box-shadow: var(--shadow-md);
+    }
+
+    .nav-links.active {
+        transform: translateY(0);
     }
 
     .mobile-menu-btn {
         display: block;
+        font-size: 2rem;
     }
 }
 
@@ -797,6 +818,38 @@ body::-webkit-scrollbar {
     display: flex;
     flex-direction: column;
     gap: 16px;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.social-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--color-smoke);
+    color: var(--color-pure-black);
+    transition: all var(--transition-normal);
+    text-decoration: none;
+}
+
+.social-icon:hover {
+    background: var(--color-pure-black);
+    color: var(--color-pure-white);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+.social-icon svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
 }
 
 .footer-links a {
