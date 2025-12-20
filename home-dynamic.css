@@ -627,9 +627,8 @@ body {
 }
 
 .diff-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(2, auto);
+    display: flex;
+    flex-wrap: wrap;
     gap: 20px;
     background: none;
     border: none;
@@ -647,24 +646,33 @@ body {
     overflow: hidden;
 }
 
-.diff-card:nth-child(1) {
-    grid-column: span 2;
-}
-
-.diff-card:nth-child(2) {
-    grid-column: span 2;
-}
-
+/* Flexbox implementation of the bento grid */
+/* Items 1, 2, 3 span "2 columns" (approx 50% width) */
+.diff-card:nth-child(1),
+.diff-card:nth-child(2),
 .diff-card:nth-child(3) {
-    grid-column: span 2;
+    flex: 1 1 calc(50% - 10px);
+    /* 50% minus half gap */
+    min-width: 300px;
 }
 
-.diff-card:nth-child(4) {
-    grid-column: span 1;
-}
-
+/* Items 4, 5 span "1 column" (approx 25% width) */
+.diff-card:nth-child(4),
 .diff-card:nth-child(5) {
-    grid-column: span 1;
+    flex: 1 1 calc(25% - 15px);
+    /* 25% minus gap parts */
+    min-width: 250px;
+}
+
+@media (max-width: 900px) {
+
+    .diff-card:nth-child(1),
+    .diff-card:nth-child(2),
+    .diff-card:nth-child(3),
+    .diff-card:nth-child(4),
+    .diff-card:nth-child(5) {
+        flex: 1 1 100%;
+    }
 }
 
 .diff-card::before {
