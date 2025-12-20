@@ -4,10 +4,32 @@
    ================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
-    initCarousel();
+    initInfiniteScroll();
     initMobileMenu();
-    // Service accordion is handled via inline onclick but we can enhance it here if needed
+    initTilt();
+    initFadeIn();
 });
+
+/* ===== Scroll-based Fade-in Animation ===== */
+function initFadeIn() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('fade-in-visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-in-up').forEach(element => {
+        observer.observe(element);
+    });
+}
 
 /* ===== Mobile Menu Toggle ===== */
 function initMobileMenu() {
@@ -17,11 +39,9 @@ function initMobileMenu() {
     if (btn && nav) {
         btn.addEventListener('click', () => {
             nav.classList.toggle('active');
-            // Change ☰ to ✕ when active
             btn.innerHTML = nav.classList.contains('active') ? '✕' : '☰';
         });
 
-        // Close menu when a link is clicked
         const links = nav.querySelectorAll('.nav-link');
         links.forEach(link => {
             link.addEventListener('click', () => {
@@ -33,82 +53,69 @@ function initMobileMenu() {
 }
 
 /* ===== Testimonial Carousel ===== */
-function initCarousel() {
-    const slides = document.querySelectorAll('.testimonial-slide');
-    const track = document.getElementById('testimonialTrack');
-    const nextBtn = document.querySelector('.carousel-nav');
+const initInfiniteScroll = () => {
+    const track = document.querySelector('.infinite-scroll-track');
+    const container = document.querySelector('.infinite-scroll-wrapper');
+    if (!track || !container) return;
 
-    if (!slides.length) return;
+    // Clone children to ensure seamless scrolling
+    // We duplicate the content enough times to fill width + scroll buffer
+    const items = Array.from(track.children);
 
-    let currentIndex = 0;
-    const intervalTime = 6000; // 6 seconds
-    let autoSlideInterval;
-
-    // function to show slide
-    function showSlide(index) {
-        // Remove active class from all
-        slides.forEach(slide => {
-            slide.classList.remove('active');
-        });
-
-        // Add active to current
-        slides[index].classList.add('active');
-    }
-
-    // Next slide logic
-    function nextSlide() {
-        currentIndex++;
-        if (currentIndex >= slides.length) {
-            currentIndex = 0;
-        }
-        showSlide(currentIndex);
-    }
-
-    // Auto play
-    function startAutoPlay() {
-        autoSlideInterval = setInterval(nextSlide, intervalTime);
-    }
-
-    function resetAutoPlay() {
-        clearInterval(autoSlideInterval);
-        startAutoPlay();
-    }
-
-    // Event Listeners
-    if (nextBtn) {
-        nextBtn.addEventListener('click', () => {
-            nextSlide();
-            resetAutoPlay();
-        });
-    }
-
-    // Start
-    startAutoPlay();
-}
-
-/* ===== Expandable Services Accordion ===== */
-// Exposed to global scope for onclick handler
-window.toggleService = function (card) {
-    const body = card.querySelector('.service-body');
-    const isActive = card.classList.contains('active');
-
-    // Close all other cards
-    document.querySelectorAll('.service-card').forEach(otherCard => {
-        if (otherCard !== card) {
-            otherCard.classList.remove('active');
-            otherCard.querySelector('.service-body').style.height = '0';
-        }
+    items.forEach(item => {
+        const clone = item.cloneNode(true);
+        clone.setAttribute('aria-hidden', 'true');
+        track.appendChild(clone);
     });
 
-    // Toggle current
-    if (!isActive) {
-        // Open
-        card.classList.add('active');
-        // Set height to scrollHeight to animate
-        body.style.height = body.scrollHeight + 'px';
-    } else {
-        // Close
-        card.classList.remove('active');
-        body.style.height = '0';
-    }
+    // Optional: Add another set if content is short
+    items.forEach(item => {
+        const clone = item.cloneNode(true);
+        clone.setAttribute('aria-hidden', 'true');
+        track.appendChild(clone);
+    });
+
+    container.classList.add('scrolling-active');
 };
+
+/* ===== Coded 3D Tilt & Glass Light Effect ===== */
+function initTilt() {
+    const cards = document.querySelectorAll('.service-card-3d');
+
+    cards.forEach(card => {
+        card.addEventListener('mousemove', e => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            // Calculate rotation (Slightly higher for more impact)
+            const rotateX = ((y - centerY) / centerY) * -20;
+            const rotateY = ((x - centerX) / centerX) * 20;
+
+            card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+
+            // --- Dynamic Glass Light Reflection ---
+            // Create or update a light spot based on mouse position
+            let light = card.querySelector('.glass-light');
+            if (!light) {
+                light = document.createElement('div');
+                light.className = 'glass-light';
+                card.querySelector('.tilt-inner').appendChild(light);
+            }
+
+            const lightX = (x / rect.width) * 100;
+            const lightY = (y / rect.height) * 100;
+
+            light.style.background = `radial-gradient(circle at ${lightX}% ${lightY}%, rgba(255,255,255,0.4) 0%, transparent 60%)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'rotateX(0deg) rotateY(0deg)';
+            const light = card.querySelector('.glass-light');
+            if (light) light.style.background = 'transparent';
+        });
+    });
+}
