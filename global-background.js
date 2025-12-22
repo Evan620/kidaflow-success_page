@@ -1,151 +1,138 @@
-/**
- * Global Background Interaction: Genetic Data Fluid (Refined)
- * Features elastic wave physics, high visibility, and enhanced sensitivity.
- */
+// 3D Background with Floating Spheres (Bubbles) using Three.js
 
-class GeneticParticle {
-    constructor(canvas) {
-        this.canvas = canvas;
-        this.ctx = canvas.getContext('2d');
-        this.init();
+document.addEventListener('DOMContentLoaded', () => {
+    // Check if Three.js is loaded
+    if (typeof THREE === 'undefined') {
+        console.warn('Three.js is not loaded. Please include it before this script.');
+        return;
     }
 
-    init() {
-        this.x = Math.random() * this.canvas.width;
-        this.y = Math.random() * this.canvas.height;
+    // Setup Scene
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
 
-        // Increased size for visibility
-        this.size = Math.random() * 2.5 + 1.5;
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.domElement.style.position = 'fixed';
+    renderer.domElement.style.top = '0';
+    renderer.domElement.style.left = '0';
+    renderer.domElement.style.width = '100%';
+    renderer.domElement.style.height = '100%';
+    renderer.domElement.style.zIndex = '-1';
+    renderer.domElement.style.pointerEvents = 'none';
+    document.body.prepend(renderer.domElement);
 
-        // Default drift velocity
-        this.vx = (Math.random() - 0.5) * 0.3;
-        this.vy = (Math.random() - 0.5) * 0.3;
+    // Spheres Setup
+    const spheres = [];
+    const sphereCount = 60;
+    // Consistent size for "almost same sizes"
+    const geometry = new THREE.SphereGeometry(1, 48, 48); // Smoother
 
-        // Interaction velocity (the "push")
-        this.ix = 0;
-        this.iy = 0;
+    // Soft, semi-transparent colors
+    const colors = [
+        0x3b82f6, // Blue
+        0x8b5cf6, // Purple
+        0x6366f1, // Indigo
+        0xa78bfa, // Light Purple
+        0x60a5fa  // Light Blue
+    ];
 
-        // Friction to make them feel "fluid"
-        this.friction = 0.96;
+    for (let i = 0; i < sphereCount; i++) {
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        const material = new THREE.MeshPhongMaterial({
+            color: color,
+            transparent: true,
+            opacity: 0.4,
+            shininess: 90,
+            emissive: color,
+            emissiveIntensity: 0.1,
+            specular: 0xffffff
+        });
 
-        // Increased opacity for visibility
-        this.opacity = Math.random() * 0.4 + 0.3;
+        const sphere = new THREE.Mesh(geometry, material);
 
-        // Sensing density (how much it reacts)
-        this.density = (Math.random() * 20) + 10;
-    }
+        // Random Position Grid-like but scattered
+        sphere.position.x = (Math.random() - 0.5) * 60;
+        sphere.position.y = (Math.random() - 0.5) * 40;
+        sphere.position.z = (Math.random() - 0.5) * 20 - 10;
 
-    draw() {
-        this.ctx.fillStyle = `rgba(140, 140, 140, ${this.opacity})`;
-        this.ctx.beginPath();
-        this.ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        this.ctx.closePath();
-        this.ctx.fill();
-    }
+        // Consistent Sizes (0.8 to 1.2 scale)
+        const scale = 0.8 + Math.random() * 0.4;
+        sphere.scale.set(scale, scale, scale);
 
-    update(mouse) {
-        // Apply interaction velocity
-        this.x += this.vx + this.ix;
-        this.y += this.vy + this.iy;
-
-        // Apply friction to interaction velocity (damping the ripple)
-        this.ix *= this.friction;
-        this.iy *= this.friction;
-
-        // Wrap around edges
-        if (this.x > this.canvas.width) this.x = 0;
-        if (this.x < 0) this.x = this.canvas.width;
-        if (this.y > this.canvas.height) this.y = 0;
-        if (this.y < 0) this.y = this.canvas.height;
-
-        // Mouse repulsion (Gravity/Wave effect)
-        let dx = this.x - mouse.x;
-        let dy = this.y - mouse.y;
-        let distance = Math.sqrt(dx * dx + dy * dy);
-
-        // Sensing radius increased as requested
-        const maxDistance = 250;
-
-        if (distance < maxDistance) {
-            // Distance-based force (stronger when closer)
-            let force = (maxDistance - distance) / maxDistance;
-
-            // Normalize direction
-            let normX = dx / distance;
-            let normY = dy / distance;
-
-            // Add to interaction velocity for a "smooth" push (wave feel)
-            this.ix += normX * force * (this.density / 50);
-            this.iy += normY * force * (this.density / 50);
-        }
-    }
-}
-
-class GeneticBackground {
-    constructor() {
-        this.canvas = document.createElement('canvas');
-        this.canvas.id = 'genetic-background';
-        this.ctx = this.canvas.getContext('2d');
-        this.particles = [];
-        this.mouse = {
-            x: -9999, // Off-screen initially
-            y: -9999
+        // Store initial positions for wave calculation
+        sphere.userData = {
+            initialX: sphere.position.x,
+            initialY: sphere.position.y,
+            initialZ: sphere.position.z,
+            phase: Math.random() * Math.PI * 2,
+            speed: 0.05 + Math.random() * 0.05
         };
 
-        this.init();
-        window.addEventListener('resize', () => this.resize());
-        window.addEventListener('mousemove', (e) => this.handleMouseMove(e));
-        this.animate();
+        scene.add(sphere);
+        spheres.push(sphere);
     }
 
-    init() {
-        this.canvas.style.position = 'fixed';
-        this.canvas.style.top = '0';
-        this.canvas.style.left = '0';
-        this.canvas.style.width = '100vw';
-        this.canvas.style.height = '100vh';
-        this.canvas.style.zIndex = '9999';
-        this.canvas.style.pointerEvents = 'none';
+    // Lighting
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+    scene.add(ambientLight);
 
-        document.body.prepend(this.canvas);
-        this.resize();
-        this.createParticles();
-    }
+    const pointLight = new THREE.PointLight(0xffffff, 0.8);
+    pointLight.position.set(10, 10, 20);
+    scene.add(pointLight);
 
-    resize() {
-        this.canvas.width = window.innerWidth;
-        this.canvas.height = window.innerHeight;
-        this.createParticles();
-    }
+    // Mouse Tracking for subtle influence
+    const mouse = new THREE.Vector2();
+    const windowHalfX = window.innerWidth / 2;
+    const windowHalfY = window.innerHeight / 2;
 
-    createParticles() {
-        this.particles = [];
-        const numberOfParticles = (this.canvas.width * this.canvas.height) / 12000;
-        const count = Math.min(numberOfParticles, 120);
+    document.addEventListener('mousemove', (event) => {
+        mouse.x = (event.clientX - windowHalfX) * 0.002;
+        mouse.y = (event.clientY - windowHalfY) * 0.002;
+    });
 
-        for (let i = 0; i < count; i++) {
-            this.particles.push(new GeneticParticle(this.canvas));
-        }
-    }
+    // Animation Loop
+    let time = 0;
 
-    handleMouseMove(e) {
-        this.mouse.x = e.clientX;
-        this.mouse.y = e.clientY;
-    }
+    const animate = () => {
+        requestAnimationFrame(animate);
+        time += 0.01;
 
-    animate() {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        camera.position.x += (mouse.x * 2 - camera.position.x) * 0.05;
+        camera.position.y += (-mouse.y * 2 - camera.position.y) * 0.05;
+        camera.lookAt(scene.position);
 
-        for (let i = 0; i < this.particles.length; i++) {
-            this.particles[i].draw();
-            this.particles[i].update(this.mouse);
-        }
+        spheres.forEach((sphere) => {
+            // Unpack data
+            const { initialX, initialY, phase } = sphere.userData;
 
-        requestAnimationFrame(() => this.animate());
-    }
-}
+            // Wave/Ripple Logic
+            // Create a wave that moves across the X/Z plane affecting Y
+            // Y position oscillates based on X position and time -> traveling wave
 
-// Initialize when DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
-    new GeneticBackground();
+            // Primary vertical wave (Water surface effect)
+            const waveY = Math.sin(initialX * 0.5 + time + phase) * 1.5;
+
+            // Secondary horizonal drift (gentle)
+            const waveX = Math.cos(initialY * 0.3 + time * 0.8 + phase) * 0.5;
+
+            sphere.position.y = initialY + waveY;
+            sphere.position.x = initialX + waveX;
+
+            // Subtle rotation
+            sphere.rotation.x += 0.001;
+            sphere.rotation.y += 0.002;
+        });
+
+        renderer.render(scene, camera);
+    };
+
+    animate();
+
+    // Handle Resize
+    window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    });
 });

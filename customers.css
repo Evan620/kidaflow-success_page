@@ -21,7 +21,7 @@
     /* Fresh green matching logo vibe */
 
     /* Semantic Colors */
-    --color-bg-primary: #f8fafc;
+    --color-bg-primary: transparent;
     /* Matching homepage light grey */
     --color-bg-secondary: #ffffff;
     --color-bg-card: #ffffff;
@@ -287,7 +287,7 @@ h6,
 .featured-stories {
     padding: 40px 0;
     /* Reduced from 80px */
-    background: var(--color-pure-white);
+    background: transparent;
 }
 
 .featured-card {
@@ -421,7 +421,7 @@ h6,
 .all-stories {
     padding: 40px 0 120px;
     /* Reduced top padding */
-    background: var(--color-pure-white);
+    background: transparent;
 }
 
 .section-title {
@@ -576,7 +576,7 @@ h6,
 .cta-section {
     padding: 100px 0;
     text-align: center;
-    background: linear-gradient(135deg, var(--color-pure-black) 0%, var(--color-charcoal) 100%);
+    background: rgba(0, 0, 0, 0.8);
     position: relative;
     overflow: hidden;
 }
