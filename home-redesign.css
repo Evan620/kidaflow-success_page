@@ -19,7 +19,7 @@
 
 
 .home-redesign-container {
-    background-color: var(--color-pure-white);
+    background-color: transparent;
     color: var(--color-text-main);
     overflow-x: hidden;
     font-family: 'Inter', sans-serif;
@@ -179,7 +179,7 @@
 /* ===== Testimonials Section (Infinite Scroll) ===== */
 .testimonials-section {
     padding: 40px 0 80px;
-    background: var(--color-pure-white);
+    background: transparent;
     overflow: hidden;
 }
 
@@ -294,7 +294,7 @@
 /* ===== Impact Section ===== */
 .impact-section {
     padding: 100px 0;
-    background: #000000;
+    background: rgba(0, 0, 0, 0.8);
     color: #ffffff;
     border-radius: 40px;
     margin: 0 40px;
@@ -369,7 +369,7 @@
 /* ===== Featured Stories Section ===== */
 .featured-stories-section {
     padding: 60px 0 40px;
-    background: var(--color-pure-white);
+    background: transparent;
 }
 
 .featured-stories-header {
@@ -575,7 +575,7 @@
 /* ===== Why Section & CTA ===== */
 .why-cta-section {
     padding: 80px 0;
-    background: #f8f9fa;
+    background: rgba(248, 249, 250, 0.5);
 }
 
 .why-cta-grid {
