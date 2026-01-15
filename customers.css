@@ -652,6 +652,12 @@ h6,
     color: var(--color-pure-black);
 }
 
+.footer-logo {
+    height: 40px;
+    width: auto;
+    margin-bottom: 16px;
+}
+
 .footer-section p {
     color: var(--color-text-secondary);
     line-height: 1.8;
